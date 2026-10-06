@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday Sandhya 🎉</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Sofia&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-pink: #ff69b4;
+            --soft-pink: #ffe6fa;
+            --accent-pink: #cc3399;
+            --deep-rose: #ff2e93;
+            --glass-bg: rgba(255, 255, 255, 0.94);
+            --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffe6fa 0%, #ffdaea 40%, #ffb6c1 100%);
+            color: #4a154b;
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Header Navigation */
+        header {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 2px solid #ffdaea;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            flex-shrink: 0;
+            position: sticky;
+            top: 0;
+        }
+
+        nav {
+            max-width: 1450px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.6rem 1rem;
+            gap: 1rem;
+        }
+
+        .title-block {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.2rem;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            font-family: 'Sofia', 'Caveat', cursive;
+            font-size: 2.1rem;
+            font-weight: bold;
+            color: var(--deep-rose);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .btn-music {
+            background: var(--deep-rose);
+            color: #fff;
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(255, 46, 147, 0.3);
+            white-space: nowrap;
+        }
+
+        .btn-music:active {
+            transform: scale(0.96);
+        }
+
+        /* Touch Scrollable Menu Tabs */
+        .nav-links {
+            display: flex;
+            gap: 0.3rem;
+            list-style: none;
+            flex-wrap: nowrap;
+            align-items: center;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding-bottom: 2px;
+        }
+
+        .nav-links::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-links button {
+            background: transparent;
+            border: 1px solid var(--primary-pink);
+            color: var(--accent-pink);
+            padding: 0.25rem 0.6rem;
+            border-radius: 15px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-links button:hover,
+        .nav-links button.active {
+            background: var(--deep-rose);
+            color: #fff;
+            border-color: var(--deep-rose);
+            box-shadow: 0 3px 10px rgba(255, 46, 147, 0.3);
+        }
+
+        /* Main Viewport Container */
+        main {
+            width: 95%;
+            max-width: 1200px;
+            margin: 0.5rem auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        /* Main Photo / Media Container */
+        .card {
+            display: none;
+            width: 100%;
+            height: 58vh;
+            height: 58dvh;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: rgba(0, 0, 0, 0.03);
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            border: 3px solid #fff;
+            animation: fadeIn 0.4s ease;
+            overflow: hidden;
+        }
+
+        .card.active {
+            display: block;
+        }
+
+        /* Pure Video Card container (No background image flicker) */
+        .card-video {
+            background-image: none !important;
+            background-color: #000;
+        }
+
+        .card video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            border-radius: 12px;
+        }
+
+        /* Dedicated Gallery View */
+        .card-gallery {
+            background-color: #fff;
+            padding: 1.2rem;
+            overflow-y: auto;
+            height: auto;
+            min-height: 58vh;
+            max-height: 65vh;
+            border-radius: 16px;
+        }
+
+        /* Gallery Grid Layout */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            width: 100%;
+            margin-top: 0.8rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            background: #fdfdfd;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 15px rgba(255, 46, 147, 0.25);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Banner Box */
+        .banner-container {
+            width: 100%;
+            min-height: 170px;
+            background: var(--glass-bg);
+            border-radius: 16px;
+            padding: 1.25rem 1.8rem;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            box-shadow: var(--card-shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .banner-content {
+            display: none;
+            width: 100%;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .banner-content.active {
+            display: block;
+        }
+
+        h1 {
+            font-size: 2.18rem;
+            color: var(--deep-rose);
+            margin-bottom: 0.4rem;
+            line-height: 1.2;
+            font-family: 'Sofia', 'Caveat', cursive;
+        }
+
+        .subtitle {
+            font-size: 1.15rem;
+            color: #662d91;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        blockquote {
+            font-style: italic;
+            font-size: 1.15rem;
+            margin: 0.2rem auto;
+            padding: 0.5rem 1.2rem;
+            background: rgba(255, 240, 250, 0.9);
+            border-left: 4px solid var(--primary-pink);
+            border-radius: 0 8px 8px 0;
+            color: #444;
+            text-align: left;
+            max-width: 850px;
+        }
+
+        /* Bottom Control Bar */
+        .controls-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-top: 0.2rem;
+            margin-bottom: 0.5rem;
+            gap: 0.5rem;
+        }
+
+        .btn-nav {
+            background: #fff;
+            color: var(--deep-rose);
+            border: 2px solid var(--deep-rose);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .btn-nav:hover, .btn-nav:active {
+            background: var(--deep-rose);
+            color: #fff;
+        }
+
+        .btn-download {
+            background: var(--deep-rose);
+            color: #fff;
+            border: 2px solid var(--deep-rose);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(255, 46, 147, 0.3);
+            display: none; /* Hidden by default for Welcome tab */
+        }
+
+        .btn-download:hover, .btn-download:active {
+            background: #cc3399;
+            border-color: #cc3399;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Adjustments for Mobile Screens */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.4rem;
+            }
+
+            .title-block {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+            }
+
+            .logo {
+                font-size: 1.7rem;
+            }
+
+            .card {
+                height: 48vh;
+                height: 48dvh;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+
+            .banner-container {
+                min-height: 130px;
+                padding: 0.8rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            blockquote {
+                font-size: 0.9rem;
+            }
+
+            .btn-nav, .btn-download {
+                padding: 0.45rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Direct Audio Stream -->
+    <audio id="bgMusic" loop autoplay preload="auto" playsinline>
+        <source src="https://www.dropbox.com/scl/fi/735u0m763w66rmdw9an5d/124-Mark-Humble-Free-Happy-Birthday-chosic.com.mp3?rlkey=9b8nxsz7ut9hwpwkjrambs5ax&st=bdqf4y32&raw=1" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <header>
+        <nav>
+            <div class="title-block">
+                <a href="#" class="logo">Sandhya's Birthday ✨</a>
+                <button id="musicToggle" class="btn-music" onclick="toggleMusic(event)">🎵 Music: ON</button>
+            </div>
+            <ul class="nav-links">
+                <li><button class="active" onclick="showSlide(0)">Welcome</button></li>
+                <li><button onclick="showSlide(1)">Birthday Girl</button></li>
+                <li><button onclick="showSlide(2)">Dreams</button></li>
+                <li><button onclick="showSlide(3)">Joy</button></li>
+                <li><button onclick="showSlide(4)">Vision</button></li>
+                <li><button onclick="showSlide(5)">Grace</button></li>
+                <li><button onclick="showSlide(6)">Milestones</button></li>
+                <li><button onclick="showSlide(7)">Gentle Joy</button></li>
+                <li><button onclick="showSlide(8)">Rising Dreams</button></li>
+                <li><button onclick="showSlide(9)">Gallery</button></li>
+                <li><button onclick="showSlide(10)">Bubbles</button></li>
+                <li><button onclick="showSlide(11)">Elegance</button></li>
+                <li><button onclick="showSlide(12)">Wish Note</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Welcome Card (Pure Video Container with NO photo background) -->
+        <div class="card card-video active">
+            <video autoplay loop muted playsinline>
+                <source src="https://www.dropbox.com/scl/fi/pcoi65u4ay4oexvfrpss5/gemini_generated_video_f18cb809.mp4?rlkey=4ifhjpc7735j85pi2i0h2mamr&st=891jqk1w&raw=1" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- Birthday Girl Card (Contains Welcome Photo) -->
+        <div class="card" style="background-image: url('https://lh3.googleusercontent.com/d/14dr71m82PQCEwwd6o-kwYDvLUqayEds8');"></div>
+
+        <div class="card" style="background-image: url('https://lh3.googleusercontent.com/d/1vXYFG0X9gIVENucq9k9vbVRyshSrbq5b');"></div>
+        <div class="card" style="background-image: url('https://lh3.googleusercontent.com/d/1XJNVPHdsPvM_8k6qRDrTN4fqau8fqDW6');"></div>
+        <div class="card" style="background-image: url('https://lh3.googleusercontent.com/d/1-jQMFg5Ksi84R3dkJiygvdIBYZ4j_HNi');"></div>
+        <div class="card" style="background-image: url('https://lh3.googleusercontent.com/d/1Bvq2GV-90bk7rhPNMEcMwGQShadlKtIq');"></div>
+        <div class="card" style="background-image: url('https://lh3.googleusercontent.com/d/1WOsuNg1Ia0wOAj_9UHd8ws_WyG6eVv3O');"></div>
+        <div class="card" style="background-image: url('https://lh3.googleusercontent.com/d/18yGiR4GzyP6lQnub8qPnTlEtrVIH0ULV');"></div>
+        <div class="card" style="background-image: url('https://lh3.googleusercontent.com/d/1wslj48ZiLkLZJZBrfIqOcCdRAnCJJ7-N');"></div>
+        
+        <!-- Gallery View -->
+        <div class="card card-gallery">
+            <h1 style="text-align: center;">All Photo Memories 🎂📸</h1>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="https://lh3.googleusercontent.com/d/14dr71m82PQCEwwd6o-kwYDvLUqayEds8" alt="Photo 1"></div>
+                <div class="gallery-item"><img src="https://lh3.googleusercontent.com/d/1BMZ1mmfWywzo3L4tjEgrh76Zy30uuYUk" alt="Photo 2"></div>
+                <div class="gallery-item"><img src="https://lh3.googleusercontent.com/d/1vXYFG0X9gIVENucq9k9vbVRyshSrbq5b" alt="Photo 3"></div>
+                <div class="gallery-item"><img src="https://lh3.googleusercontent.com/d/1XJNVPHdsPvM_8k6qRDrTN4fqau8fqDW6" alt="Photo 4"></div>
+                <div class="gallery-item"><img src="https://lh3.googleusercontent.com/d/1-jQMFg5Ksi84R3dkJiygvdIBYZ4j_HNi" alt="Photo 5"></div>
+                <div class="gallery-item"><img src="https://lh3.googleusercontent.com/d/1Bvq2GV-90bk7rhPNMEcMwGQShadlKtIq" alt="Photo 6"></div>
+                <div class="gallery-item"><img src="https://lh3.googleusercontent.com/d/1WOsuNg1Ia0wOAj_9UHd8ws_WyG6eVv3O" alt="Photo 7"></div>
+                <div class="gallery-item"><img src="https://lh3.googleusercontent.com/d/18yGiR4GzyP6lQnub8qPnTlEtrVIH0ULV" alt="Photo 8"></div>
+                <div class="gallery-item"><img src="https://lh3.googleusercontent.com/d/1wslj48ZiLkLZJZBrfIqOcCdRAnCJJ7-N" alt="Photo 9"></div>
+                <div class="gallery-item"><img src="https://lh3.googleusercontent.com/d/1BnwP5qsJQj0A0kEUQ43coiB--Z8EJEla" alt="Photo 10"></div>
+                <div class="gallery-item"><img src="https://lh3.googleusercontent.com/d/13cY32bVaIg-aCSN5Bex5woOMnu9KLeei" alt="Photo 11"></div>
+                <div class="gallery-item"><img src="https://lh3.googleusercontent.com/d/1A-bAaMicnSvxgLNA7zXPvO9I_yu95ADE" alt="Photo 12"></div>
+            </div>
+        </div>
+
+        <div class="card" style="background-image: url('https://lh3.googleusercontent.com/d/13cY32bVaIg-aCSN5Bex5woOMnu9KLeei');"></div>
+        <div class="card" style="background-image: url('https://lh3.googleusercontent.com/d/1A-bAaMicnSvxgLNA7zXPvO9I_yu95ADE');"></div>
+        <div class="card" style="background-image: url('https://lh3.googleusercontent.com/d/1BnwP5qsJQj0A0kEUQ43coiB--Z8EJEla');"></div>
+
+        <!-- Banner Container -->
+        <div class="banner-container">
+            <!-- Slide 0 -->
+            <div class="banner-content active">
+                <h1>Happy Birthday Sandhya 🎉</h1>
+                <p class="subtitle">Another year of sparkle, laughter, and living life with a wink in her eye.</p>
+                <blockquote>“May your day be filled with love that glitters like fairy lights and joy that never fades.”</blockquote>
+            </div>
+
+            <!-- Slide 1 -->
+            <div class="banner-content">
+                <h1>Sandhya, Birthday Girl 💖</h1>
+                <p class="subtitle">A chapter written in roses, glitter, and laughter.</p>
+                <blockquote>“May your year ahead be adorned with love, dreams blooming like flowers under pink skies.”</blockquote>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="banner-content">
+                <h1>Dreams Come True, Sandhya 🌟</h1>
+                <p class="subtitle">The sweetest way to honor every beautiful dream you've ever dared.</p>
+                <blockquote>“May this year bring you moments so magical they feel like chocolate dreams—rich and worth repeating.”</blockquote>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="banner-content">
+                <h1>Your Joyful Spirit, Sandhya 🌈</h1>
+                <p class="subtitle">When flowers bloom and butterflies swirl around you.</p>
+                <blockquote>“May your life always feel bursting with color, laughter, and surprises.”</blockquote>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="banner-content">
+                <h1>Everything’s Clear Now, Sandhya 🌟</h1>
+                <p class="subtitle">Seeing all blessings lined up for you.</p>
+                <blockquote>“May clarity guide every step ahead and joy dance through each day.”</blockquote>
+            </div>
+
+            <!-- Slide 5 -->
+            <div class="banner-content">
+                <h1>Your Grace, Sandhya 🌙</h1>
+                <p class="subtitle">Even the night wears a smile when you walk into it.</p>
+                <blockquote>“May your elegance shine bright through every challenge and celebration alike.”</blockquote>
+            </div>
+
+            <!-- Slide 6 -->
+            <div class="banner-content">
+                <h1>24 Years of Wonder, Sandhya 🌸</h1>
+                <p class="subtitle">A living story of laughter, love, and unforgettable moments.</p>
+                <blockquote>“May your path ahead be covered in blossoms wherever you decide to walk.”</blockquote>
+            </div>
+
+            <!-- Slide 7 -->
+            <div class="banner-content">
+                <h1>Happy Birthday Sandhya 🌸</h1>
+                <p class="subtitle">May your day sparkle with gentle joy.</p>
+                <blockquote>“Your simple elegance reminds me how happiness can live in everyday moments.”</blockquote>
+            </div>
+
+            <!-- Slide 8 -->
+            <div class="banner-content">
+                <h1>Happy Birthday Sandhya 🌿</h1>
+                <p class="subtitle">May dreams float higher than ever this year.</p>
+                <blockquote>“Every bubble you touch carries a wish—it’s beautiful how your life keeps rising.”</blockquote>
+            </div>
+
+            <!-- Slide 9 (Gallery) -->
+            <div class="banner-content">
+                <h1>Memories Gallery 📸</h1>
+                <p class="subtitle">Celebrating the woman who lights up every room.</p>
+                <blockquote>“You bring memories to life—one s
