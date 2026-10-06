@@ -529,4 +529,181 @@
             <div class="banner-content">
                 <h1>Memories Gallery 📸</h1>
                 <p class="subtitle">Celebrating the woman who lights up every room.</p>
-                <blockquote>“You bring memories to life—one s
+                <blockquote>“You bring memories to life—one smile, one laugh, one perfect moment at a time.”</blockquote>
+            </div>
+
+            <!-- Slide 10 -->
+            <div class="banner-content">
+                <h1>Happy Birthday Sandhya 🌿✨</h1>
+                <p class="subtitle">May your dreams float upward like bubbles.</p>
+                <blockquote>“Every time you touch a bubble, it’s a promise—you keep rising and glowing.”</blockquote>
+            </div>
+
+            <!-- Slide 11 -->
+            <div class="banner-content">
+                <h1>Happy Birthday Sandhya 🌟</h1>
+                <p class="subtitle">May grace carry you through all years ahead.</p>
+                <blockquote>“Your elegance never fades—you radiate timeless beauty.”</blockquote>
+            </div>
+
+            <!-- Slide 12 -->
+            <div class="banner-content">
+                <h1 style="color: #b8860b;">Happy Birthday, Sandhya ❤</h1>
+                <p class="subtitle">Another year of laughter, love, and light.</p>
+                <blockquote>“May your day sparkle brighter than the stars above. The joy you bring into life is sacred.”</blockquote>
+            </div>
+        </div>
+
+        <!-- Navigation Controls Bar -->
+        <div class="controls-bar">
+            <button class="btn-nav" onclick="prevSlide()">❮ Previous</button>
+            <button id="downloadBtn" class="btn-download" onclick="downloadCurrentMedia()">📥 Download</button>
+            <button class="btn-nav" onclick="nextSlide()">Next ❯</button>
+        </div>
+    </main>
+
+    <script>
+        let currentSlide = 0;
+        const cards = document.querySelectorAll('.card');
+        const banners = document.querySelectorAll('.banner-content');
+        const buttons = document.querySelectorAll('.nav-links button');
+        const audio = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicToggle');
+        const downloadBtn = document.getElementById('downloadBtn');
+        let musicUserPaused = false;
+
+        function playAudio() {
+            if (!musicUserPaused && audio.paused) {
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        musicBtn.innerText = "🎵 Music: ON";
+                    }).catch(error => {
+                        console.log("Autoplay waiting for user interaction:", error);
+                    });
+                }
+            }
+        }
+
+        function showSlide(index) {
+            playAudio();
+
+            cards[currentSlide].classList.remove('active');
+            banners[currentSlide].classList.remove('active');
+            buttons[currentSlide].classList.remove('active');
+
+            const currentVideo = cards[currentSlide].querySelector('video');
+            if (currentVideo) currentVideo.pause();
+            
+            currentSlide = (index + cards.length) % cards.length;
+            
+            cards[currentSlide].classList.add('active');
+            banners[currentSlide].classList.add('active');
+            buttons[currentSlide].classList.add('active');
+
+            // Hide download button on Welcome (0) and Gallery (9) tabs
+            if (currentSlide === 0 || currentSlide === 9) {
+                downloadBtn.style.display = 'none';
+            } else {
+                downloadBtn.style.display = 'block';
+            }
+
+            const nextVideo = cards[currentSlide].querySelector('video');
+            if (nextVideo) nextVideo.play();
+
+            buttons[currentSlide].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        async function downloadCurrentMedia() {
+            const activeCard = cards[currentSlide];
+            let mediaUrl = "";
+            let fileName = `Sandhya_Birthday_Slide_${currentSlide + 1}`;
+
+            // Check if active card contains video
+            const videoElem = activeCard.querySelector('video source');
+            if (videoElem && videoElem.src) {
+                mediaUrl = videoElem.src;
+                fileName += ".mp4";
+            } else {
+                // Get background image URL
+                const bgStyle = activeCard.style.backgroundImage;
+                if (bgStyle && bgStyle !== 'none' && bgStyle !== '') {
+                    const match = bgStyle.match(/url\(['"]?(.*?)['"]?\)/);
+                    if (match && match[1]) {
+                        mediaUrl = match[1];
+                        fileName += ".jpg";
+                    }
+                }
+            }
+
+            if (!mediaUrl) {
+                alert("No single media file available to download on this slide.");
+                return;
+            }
+
+            try {
+                const response = await fetch(mediaUrl);
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+                
+                const link = document.createElement('a');
+                link.href = blobUrl;
+                link.download = fileName;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(blobUrl);
+            } catch (err) {
+                window.open(mediaUrl, '_blank');
+            }
+        }
+
+        function handleFirstInteraction() {
+            if (!musicUserPaused && audio.paused) {
+                playAudio();
+            }
+            if (!audio.paused) {
+                document.removeEventListener('click', handleFirstInteraction);
+                document.removeEventListener('touchstart', handleFirstInteraction);
+                document.removeEventListener('touchend', handleFirstInteraction);
+                document.removeEventListener('pointerdown', handleFirstInteraction);
+            }
+        }
+
+        document.addEventListener('pointerdown', handleFirstInteraction, { once: true });
+        document.addEventListener('touchstart', handleFirstInteraction, { once: true });
+        document.addEventListener('touchend', handleFirstInteraction);
+        document.addEventListener('click', handleFirstInteraction);
+
+        window.addEventListener('DOMContentLoaded', playAudio);
+
+        function toggleMusic(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
+            if (audio.paused) {
+                musicUserPaused = false;
+                audio.play().then(() => {
+                    musicBtn.innerText = "🎵 Music: ON";
+                }).catch(err => {
+                    console.log("Audio playback error:", err);
+                });
+            } else {
+                musicUserPaused = true;
+                audio.pause();
+                musicBtn.innerText = "🎵 Music: OFF";
+            }
+        }
+    </script>
+</body>
+</html>
